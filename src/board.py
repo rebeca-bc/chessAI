@@ -104,8 +104,6 @@ class Board:
         # no check
         return False
 
-
-
     # get the valid moves of a psecific piece in a specific loc
     # we addes the bool to avoid infinite loop w in check
     def calc_moves(self, piece, row, col, bool=True):
@@ -194,8 +192,10 @@ class Board:
                                 # check for checks
                                 if not self.in_check(piece, move):
                                     piece.add_move(move)
+
                             else:
                                 piece.add_move(move)
+            
             if Square.in_range(col+1) and row == r:
                 if self.squares[row][col+1].has_rivalp(piece.color):
                     p = self.squares[row][col+1].piece
@@ -245,9 +245,6 @@ class Board:
                             # check for checks
                             if not self.in_check(piece, move):
                                 piece.add_move(move)
-                            # if its in check we cant add moves
-                            else:
-                                break
                         else:
                             piece.add_move(move)
 
@@ -272,6 +269,8 @@ class Board:
                                 # check for checks
                                 if not self.in_check(piece, move):
                                     piece.add_move(move)
+                                else:
+                                    break
                             else:
                                 piece.add_move(move)
                             # continue looping 
@@ -326,15 +325,13 @@ class Board:
                             # check for checks
                             if not self.in_check(piece, move):
                                 piece.add_move(move)
-                            else:
-                                break
                         else:
                             piece.add_move(move)
             
             # castling moves allow it
             # if kiinng hasnt moved
             if not piece.moved: 
-                # queen castlking
+                # queen castling
                 # we assume rook hasnt moved
                 left_rook = self.squares[row][0].piece
                 if isinstance(left_rook, Rook):
