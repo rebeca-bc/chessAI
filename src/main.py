@@ -57,7 +57,6 @@ class Main:
                             game.show_moves(screen)
                             game.show_pieces(screen)
 
-
                 # moving mouse to drag
                 elif event.type == pygame.MOUSEMOTION:
                     # check if there's actually somthing being dragged
